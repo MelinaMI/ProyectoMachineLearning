@@ -10,29 +10,45 @@ namespace tpfinal
 
 	class Estrategia
 	{
-		ArrayList datosHojas = new ArrayList();
+		
 		public ArbolBinario<DecisionData>CrearArbol(Clasificador clasificador)
 		{
+			/*
+ 			 * tengo que almacenar en el arbol la pregunta, dependiendo de la respuesta tengo hacer de nuevo otra pregunta y guardarla en alguno de los hijos. Así hasta llegar a una unica opcion posible
+			 * ejemplo
+			 * 			¿tiene pelo negro? <-- raiz
+			 		--> si	/        \ <-- no
+ 			 			 otra preg	otra preg
+			 			   
+			 */
 			
+			//crea un objeto que almacena una pregunta
 			DecisionData dato = new DecisionData(clasificador.obtenerPregunta());
+			
+			//crea un arbol de decision e inserta el objeto que contiene la pregunta
 			ArbolBinario<DecisionData> ab = new ArbolBinario<DecisionData>(dato);
-			Dictionary<string,int> datoHoja;
-			if(clasificador.crearHoja()==true)
+			//ArbolBinario<DecisionData> arb;
+			
+			//mientras que no sea una hoja 			
+			if(clasificador.crearHoja())
 			{
-				datoHoja = new Dictionary<string,int>(clasificador.obtenerDatoHoja());
-				DecisionData a = new DecisionData(datoHoja);
-				/*ab.agregarHijoDerecho(a);
-				 return arb;*/
+				clasificador.obtenerDatoHoja();
 			}
-							
+			else
+			{
+				dato = new DecisionData(clasificador.obtenerPregunta());
+				
+				//guarda en un nuevo nodo la pregunta nueva
+				ab = new ArbolBinario<DecisionData>(dato);
+			}
 			
 			if(ab.getHijoDerecho()!=null)
 			{
-				return CrearArbol(clasificador.obtenerClasificadorDerecho());
+				clasificador.obtenerClasificadorDerecho();
 			}
 			if(ab.getHijoIzquierdo()!=null)
 			{
-				 return CrearArbol(clasificador.obtenerClasificadorIzquierdo());
+				 clasificador.obtenerClasificadorIzquierdo();
 			}
 			
 			return ab;
@@ -49,9 +65,8 @@ namespace tpfinal
 
 		public String Consulta2(ArbolBinario<DecisionData> arbol)
 		{	
-			ArrayList camino = new ArrayList();
-			ArrayList caminos = new ArrayList();
-			ArrayList opciones = new ArrayList(arbol.todosLosCaminos(camino,caminos));
+			
+			ArrayList opciones = new ArrayList(arbol.todosLosCaminos());
 			string retorno = "";
 			foreach(var i in opciones)
 				 retorno = i.ToString();

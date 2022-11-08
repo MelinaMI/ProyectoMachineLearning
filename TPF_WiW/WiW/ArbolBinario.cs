@@ -11,7 +11,8 @@ namespace tp2
 		private ArbolBinario<T> hijoIzquierdo;
 		private ArbolBinario<T> hijoDerecho;
 	
-		
+		ArrayList camino = new ArrayList();
+		ArrayList caminos = new ArrayList();
 		public ArbolBinario(T dato) {
 			this.dato = dato;
 		}
@@ -139,7 +140,7 @@ namespace tp2
 		
 		ArrayList copia = new ArrayList();
 		
-		public ArrayList todosLosCaminos(ArrayList camino, ArrayList caminos)
+		public ArrayList todosLosCaminos()
 		{
 			camino.Add(this);
 			
@@ -156,14 +157,14 @@ namespace tp2
 			{
 				if(hijoIzquierdo!=null)
 				{
-					hijoIzquierdo.todosLosCaminos(camino,caminos);
+					hijoIzquierdo.todosLosCaminos();
 					camino.RemoveAt(camino.Count-1);
 					
 				}
 				
 				if(hijoDerecho!=null)
 				{
-					hijoDerecho.todosLosCaminos(camino,caminos);
+					hijoDerecho.todosLosCaminos();
 					camino.RemoveAt(camino.Count-1);
 					
 				}
