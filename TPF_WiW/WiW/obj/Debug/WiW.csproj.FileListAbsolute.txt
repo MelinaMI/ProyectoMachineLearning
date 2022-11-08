@@ -1,0 +1,14 @@
+C:\Users\borna\OneDrive\Escritorio\Melina\2022\2do cuatri\CTEDyA\TPF_WiW\WiW\bin\Debug\WiW.exe.config
+C:\Users\borna\OneDrive\Escritorio\Melina\2022\2do cuatri\CTEDyA\TPF_WiW\WiW\bin\Debug\WiW.exe
+C:\Users\borna\OneDrive\Escritorio\Melina\2022\2do cuatri\CTEDyA\TPF_WiW\WiW\bin\Debug\WiW.pdb
+C:\Users\borna\OneDrive\Escritorio\Melina\2022\2do cuatri\CTEDyA\TPF_WiW\WiW\obj\Debug\WiW.Form1.resources
+C:\Users\borna\OneDrive\Escritorio\Melina\2022\2do cuatri\CTEDyA\TPF_WiW\WiW\obj\Debug\WiW.Form2.resources
+C:\Users\borna\OneDrive\Escritorio\Melina\2022\2do cuatri\CTEDyA\TPF_WiW\WiW\obj\Debug\WiW.Consultas.resources
+C:\Users\borna\OneDrive\Escritorio\Melina\2022\2do cuatri\CTEDyA\TPF_WiW\WiW\obj\Debug\WiW.FormUser.resources
+C:\Users\borna\OneDrive\Escritorio\Melina\2022\2do cuatri\CTEDyA\TPF_WiW\WiW\obj\Debug\WiW.Inicio.resources
+C:\Users\borna\OneDrive\Escritorio\Melina\2022\2do cuatri\CTEDyA\TPF_WiW\WiW\obj\Debug\WiW.csproj.GenerateResource.Cache
+C:\Users\borna\OneDrive\Escritorio\Melina\2022\2do cuatri\CTEDyA\TPF_WiW\WiW\obj\Debug\WiW.exe
+C:\Users\borna\OneDrive\Escritorio\Melina\2022\2do cuatri\CTEDyA\TPF_WiW\WiW\obj\Debug\WiW.pdb
+C:\Users\borna\OneDrive\Escritorio\Melina\2022\2do cuatri\CTEDyA\TPF_WiW\WiW\obj\Debug\WiW.csproj.AssemblyReference.cache
+C:\Users\borna\OneDrive\Escritorio\Melina\2022\2do cuatri\CTEDyA\TPF_WiW\WiW\obj\Debug\WiW.csproj.SuggestedBindingRedirects.cache
+C:\Users\borna\OneDrive\Escritorio\Melina\2022\2do cuatri\CTEDyA\TPF_WiW\WiW\obj\Debug\WiW.csproj.CoreCompileInputs.cache
