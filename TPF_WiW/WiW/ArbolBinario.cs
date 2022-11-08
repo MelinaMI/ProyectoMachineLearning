@@ -1,5 +1,7 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.Collections;
+using tp1;
 namespace tp2
 {
 	public class ArbolBinario<T>
@@ -46,20 +48,127 @@ namespace tp2
 			return this.hijoIzquierdo==null && this.hijoDerecho==null;
 		}
 		
-		public void inorden() {
+				public void inorden()
+		{
+			//Se procesa el hijo izquierdo, luego la raíz y último el hijo derecho
+			if(hijoIzquierdo!=null)
+				hijoIzquierdo.inorden();
+			Console.Write(dato + " ");
+			if(hijoDerecho!=null)
+				hijoDerecho.inorden();
 		}
 		
-		public void preorden() {
+		public string preorden()
+		{
+			//Se procesa primero la raíz y luego sus hijos, izquierdo y derecho.
+			string preOrden = "";
+			//Se procesa primero la raíz y luego sus hijos, izquierdo y derecho.
+			if(dato !=null)
+				preOrden = dato.ToString() + " ";
+			if(hijoIzquierdo!=null)
+				preOrden = preOrden + hijoIzquierdo.preorden();
+			if(hijoDerecho!=null)
+				preOrden  = preOrden + hijoDerecho.preorden();
+			return preOrden;
 		}
 		
-		public void postorden() {
+		public void postorden()
+		{
+			//Se procesan primero los hijos, izquierdo y derecho, y luego la raíz
+			if(hijoIzquierdo!=null)
+				hijoIzquierdo.postorden();
+			if(hijoDerecho!=null)
+				hijoDerecho.postorden();
+			Console.Write(dato + " ");
 		}
 		
-		public void recorridoPorNiveles() {
+		public void recorridoPorNiveles()
+		{
+			//Se procesan los nodos teniendo en cuenta sus niveles, primero la raíz, luego los hijos, los hijos de éstos, etc.
+			
+			Cola<ArbolBinario<T>> c = new Cola<ArbolBinario<T>>();
+			ArbolBinario<T> arbolaux;
+			c.encolar(this);
+			while(!c.esVacia())
+			{
+				arbolaux=c.desencolar();
+				Console.Write(arbolaux.dato + " ");
+				
+				if(arbolaux.hijoIzquierdo !=null)
+					c.encolar(arbolaux.hijoIzquierdo);
+				if(arbolaux.hijoDerecho !=null)
+					c.encolar(arbolaux.hijoDerecho);
+			}
 		}
-	
-		public int contarHojas() {
-			return 0;
+		
+		
+		public int contarHojas()
+		{
+			int contadorHojas=0;
+			
+			if(esHoja())
+				contadorHojas++;
+			
+			if(hijoIzquierdo!=null)
+				contadorHojas = contadorHojas + hijoIzquierdo.contarHojas();
+			
+			if(hijoDerecho!=null)
+				contadorHojas = contadorHojas + hijoDerecho.contarHojas();
+			
+			
+			return contadorHojas;
+		}
+		
+		public string contenidoHoja()
+		{
+			string contenido = "";
+			
+			if(esHoja())
+				contenido = dato.ToString() + " ";
+			
+			if(hijoIzquierdo!=null)
+				contenido = contenido + hijoIzquierdo.contenidoHoja();
+			
+			if(hijoDerecho!=null)
+				contenido = contenido + hijoDerecho.contenidoHoja();
+			
+			
+			return contenido;
+		}
+		
+		
+		ArrayList copia = new ArrayList();
+		
+		public ArrayList todosLosCaminos(ArrayList camino, ArrayList caminos)
+		{
+			camino.Add(this);
+			
+			if(this.esHoja())
+			{
+				//guarda camino en una lista de copia
+				copia.AddRange(camino);
+				//copia camino en caminos
+				foreach(var i in camino)
+		    		caminos.Add(i);
+				
+			}
+			else
+			{
+				if(hijoIzquierdo!=null)
+				{
+					hijoIzquierdo.todosLosCaminos(camino,caminos);
+					camino.RemoveAt(camino.Count-1);
+					
+				}
+				
+				if(hijoDerecho!=null)
+				{
+					hijoDerecho.todosLosCaminos(camino,caminos);
+					camino.RemoveAt(camino.Count-1);
+					
+				}
+			}
+			return caminos;
 		}
 		
 		public void recorridoEntreNiveles(int n,int m) {
