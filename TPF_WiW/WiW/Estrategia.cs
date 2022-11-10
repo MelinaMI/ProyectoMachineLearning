@@ -31,21 +31,12 @@ namespace tpfinal
 			else
 			{
 				dato = new DecisionData(clasificador.obtenerPregunta());
-				
-				//guarda en un nuevo nodo la pregunta nueva
-				//ab = new ArbolBinario<DecisionData>(dato);
-			}
-			
-			if(ab.getHijoDerecho()!=null)
-			{
+				ab = new ArbolBinario<DecisionData>(dato);
 				ab.agregarHijoDerecho(CrearArbol(clasificador.obtenerClasificadorDerecho()));
-			}
-				                      
-			if(ab.getHijoIzquierdo()!=null)
-			{
 				ab.agregarHijoIzquierdo(CrearArbol(clasificador.obtenerClasificadorIzquierdo()));
-			}
 			
+			}
+
 			return ab;
 		}
 		
