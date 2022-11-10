@@ -13,42 +13,37 @@ namespace tpfinal
 		
 		public ArbolBinario<DecisionData>CrearArbol(Clasificador clasificador)
 		{
-			/*
- 			 * tengo que almacenar en el arbol la pregunta, dependiendo de la respuesta tengo hacer de nuevo otra pregunta y guardarla en alguno de los hijos. Así hasta llegar a una unica opcion posible
-			 * ejemplo
-			 * 			¿tiene pelo negro? <-- raiz
-			 		--> si	/        \ <-- no
- 			 			 otra preg	otra preg
-			 			   
-			 */
-			
-			//crea un objeto que almacena una pregunta
+			//Construyo un objeto que almacena una pregunta.
 			DecisionData dato = new DecisionData(clasificador.obtenerPregunta());
 			
-			//crea un arbol de decision e inserta el objeto que contiene la pregunta
+			//crea un nodo de decision e inserta el objeto que contiene la pregunta
 			ArbolBinario<DecisionData> ab = new ArbolBinario<DecisionData>(dato);
-			//ArbolBinario<DecisionData> arb;
 			
-			//mientras que no sea una hoja 			
-			if(clasificador.crearHoja())
+			//Construyo un objeto que almacena un dato de un nodo-hoja de tipo Dictionary<string, int>
+			Dictionary<string,int> nodohoja = new Dictionary<string,int>();
+			
+				
+			if(clasificador.crearHoja()) //Retorna True si el conjunto de datos corresponde a un nodo-hoja y False en caso contrario
 			{
-				clasificador.obtenerDatoHoja();
+				nodohoja = clasificador.obtenerDatoHoja(); // Devuelve el dato que debe almacenarse en un nodo-hoja. El dato devuelto es de tipo Dictionary
+				
 			}
 			else
 			{
 				dato = new DecisionData(clasificador.obtenerPregunta());
 				
 				//guarda en un nuevo nodo la pregunta nueva
-				ab = new ArbolBinario<DecisionData>(dato);
+				//ab = new ArbolBinario<DecisionData>(dato);
 			}
 			
 			if(ab.getHijoDerecho()!=null)
 			{
-				clasificador.obtenerClasificadorDerecho();
+				ab.agregarHijoDerecho(CrearArbol(clasificador.obtenerClasificadorDerecho()));
 			}
+				                      
 			if(ab.getHijoIzquierdo()!=null)
 			{
-				 clasificador.obtenerClasificadorIzquierdo();
+				ab.agregarHijoIzquierdo(CrearArbol(clasificador.obtenerClasificadorIzquierdo()));
 			}
 			
 			return ab;
