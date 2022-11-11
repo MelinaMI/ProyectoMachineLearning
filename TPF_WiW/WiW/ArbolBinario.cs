@@ -10,46 +10,44 @@ namespace tp2
 		private T dato;
 		private ArbolBinario<T> hijoIzquierdo;
 		private ArbolBinario<T> hijoDerecho;
-	
-		ArrayList camino = new ArrayList();
-		ArrayList caminos = new ArrayList();
+
 		public ArbolBinario(T dato) {
 			this.dato = dato;
 		}
-	
+		
 		public T getDatoRaiz() {
 			return this.dato;
 		}
-	
+		
 		public ArbolBinario<T> getHijoIzquierdo() {
 			return this.hijoIzquierdo;
 		}
-	
+		
 		public ArbolBinario<T> getHijoDerecho() {
 			return this.hijoDerecho;
 		}
-	
+		
 		public void agregarHijoIzquierdo(ArbolBinario<T> hijo) {
 			this.hijoIzquierdo=hijo;
 		}
-	
+		
 		public void agregarHijoDerecho(ArbolBinario<T> hijo) {
 			this.hijoDerecho=hijo;
 		}
-	
+		
 		public void eliminarHijoIzquierdo() {
 			this.hijoIzquierdo=null;
 		}
-	
+		
 		public void eliminarHijoDerecho() {
 			this.hijoDerecho=null;
 		}
-	
+		
 		public bool esHoja() {
 			return this.hijoIzquierdo==null && this.hijoDerecho==null;
 		}
 		
-				public void inorden()
+		public void inorden()
 		{
 			//Se procesa el hijo izquierdo, luego la raíz y último el hijo derecho
 			if(hijoIzquierdo!=null)
@@ -59,19 +57,7 @@ namespace tp2
 				hijoDerecho.inorden();
 		}
 		
-		public string preorden()
-		{
-			//Se procesa primero la raíz y luego sus hijos, izquierdo y derecho.
-			string preOrden = "";
-			//Se procesa primero la raíz y luego sus hijos, izquierdo y derecho.
-			if(dato !=null)
-				preOrden = dato.ToString() + " ";
-			if(hijoIzquierdo!=null)
-				preOrden = preOrden + hijoIzquierdo.preorden();
-			if(hijoDerecho!=null)
-				preOrden  = preOrden + hijoDerecho.preorden();
-			return preOrden;
-		}
+		
 		
 		public void postorden()
 		{
@@ -100,6 +86,53 @@ namespace tp2
 				if(arbolaux.hijoDerecho !=null)
 					c.encolar(arbolaux.hijoDerecho);
 			}
+		}
+		
+		
+		/*public string recorridoPorNivelesConSeparacion(
+		{
+			//Se procesan los nodos teniendo en cuenta sus niveles, primero la raíz, luego los hijos, los hijos de éstos, etc.
+			
+			
+			/*
+			Cola<ArbolBinario<T>> c = new Cola<ArbolBinario<T>>();
+			ArbolBinario<T> arbolaux;
+			c.encolar(this);
+			c.encolar(null);
+			
+			while(!c.esVacia())
+			{
+				arbolaux=c.desencolar();
+				
+				
+				if(arbolaux == null)
+				{
+					if(!c.esVacia())
+						c.encolar(null);
+				}
+				else
+				{
+					Console.Write(arbolaux.dato + " ");
+					if(arbolaux.hijoIzquierdo!=null)
+						c.encolar(arbolaux.hijoIzquierdo);
+					if(arbolaux.hijoDerecho!=null)
+						c.encolar(arbolaux.hijoDerecho);
+				}
+				
+			}*/
+		
+		public string Preorden()
+		{
+			//Se procesa primero la raíz y luego sus hijos, izquierdo y derecho.
+			string preOrden = "";
+			//Se procesa primero la raíz y luego sus hijos, izquierdo y derecho.
+			if(dato !=null)
+				preOrden = dato.ToString() + " ";
+			if(hijoIzquierdo!=null)
+				preOrden = preOrden + hijoIzquierdo.Preorden();
+			if(hijoDerecho!=null)
+				preOrden  = preOrden + hijoDerecho.Preorden();
+			return preOrden;
 		}
 		
 		
@@ -137,42 +170,61 @@ namespace tp2
 			return contenido;
 		}
 		
-		
-		ArrayList copia = new ArrayList();
-		
-		public ArrayList todosLosCaminos()
+		public string Caminos(ArrayList camino, ArrayList caminos, ArrayList copia)
 		{
-			camino.Add(this);
-			
-			if(this.esHoja())
+			//Se procesa primero la raíz y luego sus hijos, izquierdo y derecho.
+			string preOrden = "";
+			//Se procesa primero la raíz y luego sus hijos, izquierdo y derecho.
+			if(dato !=null)
 			{
+				camino.Add(this);
 				//guarda camino en una lista de copia
+				preOrden = dato.ToString() + " ";
 				copia.AddRange(camino);
 				//copia camino en caminos
 				foreach(var i in camino)
 		    		caminos.Add(i);
 				
-			}
-			else
-			{
-				if(hijoIzquierdo!=null)
-				{
-					hijoIzquierdo.todosLosCaminos();
-					camino.RemoveAt(camino.Count-1);
-					
-				}
 				
-				if(hijoDerecho!=null)
-				{
-					hijoDerecho.todosLosCaminos();
-					camino.RemoveAt(camino.Count-1);
-					
-				}
 			}
-			return caminos;
+			if(hijoIzquierdo!=null)
+				preOrden = preOrden + hijoIzquierdo.Caminos(camino,caminos,copia);
+			if(hijoDerecho!=null)
+				preOrden  = preOrden + hijoDerecho.Caminos(camino,caminos,copia);
+			return preOrden;
 		}
 		
-		public void recorridoEntreNiveles(int n,int m) {
+		
+		public void recorridoPorNivelesConSeparacion(ArbolBinario<T>arbol)
+		{
+			//Se procesan los nodos teniendo en cuenta sus niveles, primero la raíz, luego los hijos, los hijos de éstos, etc.
+			
+			Cola<ArbolBinario<T>> c = new Cola<ArbolBinario<T>>();
+			ArbolBinario<T> arbolaux;
+			c.encolar(this);
+			c.encolar(null);
+			
+			while(!c.esVacia())
+			{
+				arbolaux=c.desencolar();
+				if(arbolaux == null)
+				{
+					if(!c.esVacia())
+						c.encolar(null);
+				}
+				else
+				{
+					Console.WriteLine(arbolaux.dato + " ");
+					if(arbolaux.hijoIzquierdo!=null)
+						c.encolar(arbolaux.hijoIzquierdo);
+					if(arbolaux.hijoDerecho!=null)
+						c.encolar(arbolaux.hijoDerecho);
+				}
+				
+			}
 		}
+		
+		
+		
 	}
 }

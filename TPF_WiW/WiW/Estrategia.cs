@@ -20,12 +20,11 @@ namespace tpfinal
 			ArbolBinario<DecisionData> ab = new ArbolBinario<DecisionData>(dato);
 			
 			//Construyo un objeto que almacena un dato de un nodo-hoja de tipo Dictionary<string, int>
-			Dictionary<string,int> nodohoja = new Dictionary<string,int>();
-			
+			Dictionary<string,int> nodohoja;
 				
-			if(clasificador.crearHoja()) //Retorna True si el conjunto de datos corresponde a un nodo-hoja y False en caso contrario
+			if(clasificador.crearHoja()==true) //Retorna True si el conjunto de datos corresponde a un nodo-hoja y False en caso contrario
 			{
-				nodohoja = clasificador.obtenerDatoHoja(); // Devuelve el dato que debe almacenarse en un nodo-hoja. El dato devuelto es de tipo Dictionary
+				nodohoja = new Dictionary<string,int>(clasificador.obtenerDatoHoja()); // Devuelve el dato que debe almacenarse en un nodo-hoja. El dato devuelto es de tipo Dictionary
 				
 			}
 			else
@@ -40,30 +39,49 @@ namespace tpfinal
 			return ab;
 		}
 		
+		
 		public String Consulta1(ArbolBinario<DecisionData> arbol)
-		{
-			//Retorna un texto con todas las posibles predicciones que puede calcular el árbol de decisión del sistema..
-			
-			return arbol.preorden();
-			//return arbol.contenidoHoja();
+		{			
+			return arbol.contenidoHoja();
 		}
 
-
+		ArrayList camino = new ArrayList();
+		ArrayList caminos = new ArrayList();
+		ArrayList copia = new ArrayList();
+		
 		public String Consulta2(ArbolBinario<DecisionData> arbol)
-		{	
-			
-			ArrayList opciones = new ArrayList(arbol.todosLosCaminos());
-			string retorno = "";
-			foreach(var i in opciones)
-				 retorno = i.ToString();
-			
-			return retorno;
+		{	 		
+			return arbol.Caminos(camino,caminos,copia);
 			
 		}
 		public String Consulta3(ArbolBinario<DecisionData> arbol)
 		{
-			string result = "Implementar";
-			return result;
+			Cola<ArbolBinario<DecisionData>> c = new Cola<ArbolBinario<DecisionData>>();
+			ArbolBinario<DecisionData> arbolaux;
+			c.encolar(arbol);
+			c.encolar(null);
+			String cola = "";
+			while(!c.esVacia())
+			{
+				arbolaux=c.desencolar();
+				if(arbolaux == null)
+				{
+					if(!c.esVacia())
+						c.encolar(null);
+				}
+				else
+				{
+					cola = arbolaux.getDatoRaiz().ToString() + " ";
+					if(arbolaux.getHijoIzquierdo()!=null)
+						c.encolar(arbolaux.getHijoIzquierdo());
+					if(arbolaux.getHijoIzquierdo()!=null)
+						c.encolar(arbolaux.getHijoIzquierdo());
+				}
+				
+			}
+			
+			
+			return cola;
 		}
 
 	}
