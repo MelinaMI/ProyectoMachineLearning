@@ -40,6 +40,8 @@ namespace tpfinal
 		}
 		
 		
+		
+		
 		public String Consulta1(ArbolBinario<DecisionData> arbol)
 		{			
 			return arbol.contenidoHoja();
@@ -77,7 +79,7 @@ namespace tpfinal
 					if(arbolaux.getHijoIzquierdo()!=null)
 						c.encolar(arbolaux.getHijoIzquierdo());
 				}
-				
+				return cola;
 			}
 			
 			
