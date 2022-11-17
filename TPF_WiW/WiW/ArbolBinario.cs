@@ -164,7 +164,7 @@ namespace tp2
 			return preOrden;
 		}
 		
-		public void recorridoPorNivelesConSeparacion(ArbolBinario<T>arbol)
+		public void recorridoPorNivelesConSeparacion()
 		{
 			Cola<ArbolBinario<T>> c = new Cola<ArbolBinario<T>>();
 			ArbolBinario<T> arbolaux;

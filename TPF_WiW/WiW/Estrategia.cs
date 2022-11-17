@@ -13,10 +13,10 @@ namespace tpfinal
 		ArrayList camino = new ArrayList();
 		ArrayList caminos = new ArrayList();
 		ArrayList copia = new ArrayList();	
+		Cola<ArbolBinario<DecisionData>> c = new Cola<ArbolBinario<DecisionData>>();
 		
 		public ArbolBinario<DecisionData>CrearArbol(Clasificador clasificador)
 		{
-			
 			DecisionData dato = new DecisionData(clasificador.obtenerPregunta()); //Construye un objeto que almacena una pregunta.
 			
 			ArbolBinario<DecisionData> ab = new ArbolBinario<DecisionData>(dato); //crea un nodo de decision e inserta el objeto que contiene la pregunta
@@ -54,7 +54,6 @@ namespace tpfinal
 		
 		public String Consulta3(ArbolBinario<DecisionData> arbol)
 		{
-			Cola<ArbolBinario<DecisionData>> c = new Cola<ArbolBinario<DecisionData>>();
 			ArbolBinario<DecisionData> arbolaux;
 			c.encolar(arbol);
 			c.encolar(null);
