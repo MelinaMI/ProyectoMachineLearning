@@ -173,24 +173,33 @@ namespace tp2
 		public string Caminos(ArrayList camino, ArrayList caminos, ArrayList copia)
 		{
 			//Se procesa primero la raíz y luego sus hijos, izquierdo y derecho.
-			string preOrden = "";
+			string preOrden = dato.ToString() + " ";
+			
 			//Se procesa primero la raíz y luego sus hijos, izquierdo y derecho.
 			if(dato !=null)
 			{
 				camino.Add(this);
-				//guarda camino en una lista de copia
-				preOrden = dato.ToString() + " ";
-				copia.AddRange(camino);
-				//copia camino en caminos
-				foreach(var i in camino)
-		    		caminos.Add(i);
+				
+				if(esHoja())
+				{
+					//guarda camino en una lista de copia
+					copia.AddRange(camino);
+					//copia camino en caminos
+					foreach(var i in camino)
+						caminos.Add(i);
+				}
+				else
+				{
+					if(hijoIzquierdo!=null)
+						preOrden = " " + preOrden + hijoIzquierdo.Caminos(camino,caminos,copia);
+					if(hijoDerecho!=null)
+						preOrden  = " " + preOrden + hijoDerecho.Caminos(camino,caminos,copia);
+				}
+				
 				
 				
 			}
-			if(hijoIzquierdo!=null)
-				preOrden = preOrden + hijoIzquierdo.Caminos(camino,caminos,copia);
-			if(hijoDerecho!=null)
-				preOrden  = preOrden + hijoDerecho.Caminos(camino,caminos,copia);
+			
 			return preOrden;
 		}
 		

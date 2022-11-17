@@ -19,13 +19,15 @@ namespace tpfinal
 			//crea un nodo de decision e inserta el objeto que contiene la pregunta
 			ArbolBinario<DecisionData> ab = new ArbolBinario<DecisionData>(dato);
 			
-			//Construyo un objeto que almacena un dato de un nodo-hoja de tipo Dictionary<string, int>
-			Dictionary<string,int> nodohoja;
-				
+			
+			DecisionData nodohoja;
+			
+			
 			if(clasificador.crearHoja()==true) //Retorna True si el conjunto de datos corresponde a un nodo-hoja y False en caso contrario
 			{
-				nodohoja = new Dictionary<string,int>(clasificador.obtenerDatoHoja()); // Devuelve el dato que debe almacenarse en un nodo-hoja. El dato devuelto es de tipo Dictionary
+				nodohoja = new DecisionData(clasificador.obtenerDatoHoja()); // Devuelve el dato que debe almacenarse en un nodo-hoja. El dato devuelto es de tipo Dictionary
 				
+				ab = new ArbolBinario<DecisionData>(nodohoja);
 			}
 			else
 			{
@@ -33,7 +35,7 @@ namespace tpfinal
 				ab = new ArbolBinario<DecisionData>(dato);
 				ab.agregarHijoDerecho(CrearArbol(clasificador.obtenerClasificadorDerecho()));
 				ab.agregarHijoIzquierdo(CrearArbol(clasificador.obtenerClasificadorIzquierdo()));
-			
+				
 			}
 
 			return ab;
@@ -43,7 +45,7 @@ namespace tpfinal
 		
 		
 		public String Consulta1(ArbolBinario<DecisionData> arbol)
-		{			
+		{
 			return arbol.contenidoHoja();
 		}
 
@@ -52,17 +54,21 @@ namespace tpfinal
 		ArrayList copia = new ArrayList();
 		
 		public String Consulta2(ArbolBinario<DecisionData> arbol)
-		{	 		
+		{
 			return arbol.Caminos(camino,caminos,copia);
 			
 		}
+		
+		/*
+		 En relación a la consulta 3: en el string "cola" no estás concatenando el texto, solo reemplazando al anterior por el nuevo. Usa cola += ...
+		 */
 		public String Consulta3(ArbolBinario<DecisionData> arbol)
 		{
 			Cola<ArbolBinario<DecisionData>> c = new Cola<ArbolBinario<DecisionData>>();
 			ArbolBinario<DecisionData> arbolaux;
 			c.encolar(arbol);
 			c.encolar(null);
-			String cola = "";
+			string cola = "";
 			while(!c.esVacia())
 			{
 				arbolaux=c.desencolar();
@@ -73,13 +79,13 @@ namespace tpfinal
 				}
 				else
 				{
-					cola = arbolaux.getDatoRaiz().ToString() + " ";
+					cola += arbolaux.getDatoRaiz().ToString() + " ";
 					if(arbolaux.getHijoIzquierdo()!=null)
 						c.encolar(arbolaux.getHijoIzquierdo());
-					if(arbolaux.getHijoIzquierdo()!=null)
-						c.encolar(arbolaux.getHijoIzquierdo());
+					if(arbolaux.getHijoDerecho()!=null)
+						c.encolar(arbolaux.getHijoDerecho());
 				}
-				return cola;
+				//return cola;
 			}
 			
 			
