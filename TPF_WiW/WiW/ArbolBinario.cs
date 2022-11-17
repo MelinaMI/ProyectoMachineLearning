@@ -57,8 +57,6 @@ namespace tp2
 				hijoDerecho.inorden();
 		}
 		
-		
-		
 		public void postorden()
 		{
 			//Se procesan primero los hijos, izquierdo y derecho, y luego la raíz
@@ -88,39 +86,6 @@ namespace tp2
 			}
 		}
 		
-		
-		/*public string recorridoPorNivelesConSeparacion(
-		{
-			//Se procesan los nodos teniendo en cuenta sus niveles, primero la raíz, luego los hijos, los hijos de éstos, etc.
-			
-			
-			/*
-			Cola<ArbolBinario<T>> c = new Cola<ArbolBinario<T>>();
-			ArbolBinario<T> arbolaux;
-			c.encolar(this);
-			c.encolar(null);
-			
-			while(!c.esVacia())
-			{
-				arbolaux=c.desencolar();
-				
-				
-				if(arbolaux == null)
-				{
-					if(!c.esVacia())
-						c.encolar(null);
-				}
-				else
-				{
-					Console.Write(arbolaux.dato + " ");
-					if(arbolaux.hijoIzquierdo!=null)
-						c.encolar(arbolaux.hijoIzquierdo);
-					if(arbolaux.hijoDerecho!=null)
-						c.encolar(arbolaux.hijoDerecho);
-				}
-				
-			}*/
-		
 		public string Preorden()
 		{
 			//Se procesa primero la raíz y luego sus hijos, izquierdo y derecho.
@@ -134,7 +99,6 @@ namespace tp2
 				preOrden  = preOrden + hijoDerecho.Preorden();
 			return preOrden;
 		}
-		
 		
 		public int contarHojas()
 		{
@@ -195,19 +159,13 @@ namespace tp2
 					if(hijoDerecho!=null)
 						preOrden  = " " + preOrden + hijoDerecho.Caminos(camino,caminos,copia);
 				}
-				
-				
-				
 			}
 			
 			return preOrden;
 		}
 		
-		
 		public void recorridoPorNivelesConSeparacion(ArbolBinario<T>arbol)
 		{
-			//Se procesan los nodos teniendo en cuenta sus niveles, primero la raíz, luego los hijos, los hijos de éstos, etc.
-			
 			Cola<ArbolBinario<T>> c = new Cola<ArbolBinario<T>>();
 			ArbolBinario<T> arbolaux;
 			c.encolar(this);
@@ -229,11 +187,7 @@ namespace tp2
 					if(arbolaux.hijoDerecho!=null)
 						c.encolar(arbolaux.hijoDerecho);
 				}
-				
 			}
 		}
-		
-		
-		
 	}
 }

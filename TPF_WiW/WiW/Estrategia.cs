@@ -10,18 +10,18 @@ namespace tpfinal
 
 	class Estrategia
 	{
+		ArrayList camino = new ArrayList();
+		ArrayList caminos = new ArrayList();
+		ArrayList copia = new ArrayList();	
 		
 		public ArbolBinario<DecisionData>CrearArbol(Clasificador clasificador)
 		{
-			//Construyo un objeto que almacena una pregunta.
-			DecisionData dato = new DecisionData(clasificador.obtenerPregunta());
 			
-			//crea un nodo de decision e inserta el objeto que contiene la pregunta
-			ArbolBinario<DecisionData> ab = new ArbolBinario<DecisionData>(dato);
+			DecisionData dato = new DecisionData(clasificador.obtenerPregunta()); //Construye un objeto que almacena una pregunta.
 			
+			ArbolBinario<DecisionData> ab = new ArbolBinario<DecisionData>(dato); //crea un nodo de decision e inserta el objeto que contiene la pregunta
 			
 			DecisionData nodohoja;
-			
 			
 			if(clasificador.crearHoja()==true) //Retorna True si el conjunto de datos corresponde a un nodo-hoja y False en caso contrario
 			{
@@ -41,18 +41,11 @@ namespace tpfinal
 			return ab;
 		}
 		
-		
-		
-		
 		public String Consulta1(ArbolBinario<DecisionData> arbol)
 		{
 			return arbol.contenidoHoja();
 		}
 
-		ArrayList camino = new ArrayList();
-		ArrayList caminos = new ArrayList();
-		ArrayList copia = new ArrayList();
-		
 		public String Consulta2(ArbolBinario<DecisionData> arbol)
 		{
 			return arbol.Caminos(camino,caminos,copia);
@@ -82,12 +75,9 @@ namespace tpfinal
 					if(arbolaux.getHijoDerecho()!=null)
 						c.encolar(arbolaux.getHijoDerecho());
 				}
-				
 			}
-			
 			
 			return cola;
 		}
-
 	}
 }
