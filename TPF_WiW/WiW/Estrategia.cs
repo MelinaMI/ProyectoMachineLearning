@@ -59,9 +59,6 @@ namespace tpfinal
 			
 		}
 		
-		/*
-		 En relación a la consulta 3: en el string "cola" no estás concatenando el texto, solo reemplazando al anterior por el nuevo. Usa cola += ...
-		 */
 		public String Consulta3(ArbolBinario<DecisionData> arbol)
 		{
 			Cola<ArbolBinario<DecisionData>> c = new Cola<ArbolBinario<DecisionData>>();
@@ -85,7 +82,7 @@ namespace tpfinal
 					if(arbolaux.getHijoDerecho()!=null)
 						c.encolar(arbolaux.getHijoDerecho());
 				}
-				//return cola;
+				
 			}
 			
 			
