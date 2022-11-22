@@ -17,28 +17,26 @@ namespace tpfinal
 		
 		public ArbolBinario<DecisionData>CrearArbol(Clasificador clasificador)
 		{
-			DecisionData dato = new DecisionData(clasificador.obtenerPregunta()); //Construye un objeto que almacena una pregunta.
-			
-			ArbolBinario<DecisionData> ab = new ArbolBinario<DecisionData>(dato); //crea un nodo de decision e inserta el objeto que contiene la pregunta
+			DecisionData pregunta = new DecisionData(clasificador.obtenerPregunta()); 
+			ArbolBinario<DecisionData> arb = new ArbolBinario<DecisionData>(pregunta); 
 			
 			DecisionData nodohoja;
 			
-			if(clasificador.crearHoja()==true) //Retorna True si el conjunto de datos corresponde a un nodo-hoja y False en caso contrario
+			if(clasificador.crearHoja()==true) 
 			{
-				nodohoja = new DecisionData(clasificador.obtenerDatoHoja()); // Devuelve el dato que debe almacenarse en un nodo-hoja. El dato devuelto es de tipo Dictionary
-				
-				ab = new ArbolBinario<DecisionData>(nodohoja);
+				nodohoja = new DecisionData(clasificador.obtenerDatoHoja()); 
+				arb = new ArbolBinario<DecisionData>(nodohoja);
 			}
 			else
 			{
-				dato = new DecisionData(clasificador.obtenerPregunta());
-				ab = new ArbolBinario<DecisionData>(dato);
-				ab.agregarHijoDerecho(CrearArbol(clasificador.obtenerClasificadorDerecho()));
-				ab.agregarHijoIzquierdo(CrearArbol(clasificador.obtenerClasificadorIzquierdo()));
+				pregunta = new DecisionData(clasificador.obtenerPregunta());
+				arb = new ArbolBinario<DecisionData>(pregunta);
+				arb.agregarHijoDerecho(CrearArbol(clasificador.obtenerClasificadorDerecho()));
+				arb.agregarHijoIzquierdo(CrearArbol(clasificador.obtenerClasificadorIzquierdo()));
 				
 			}
 
-			return ab;
+			return arb;
 		}
 		
 		public String Consulta1(ArbolBinario<DecisionData> arbol)
@@ -68,7 +66,7 @@ namespace tpfinal
 				}
 				else
 				{
-					cola += arbolaux.getDatoRaiz().ToString() + " ";
+					cola += arbolaux.getDatoRaiz().ToString() + "\n";
 					if(arbolaux.getHijoIzquierdo()!=null)
 						c.encolar(arbolaux.getHijoIzquierdo());
 					if(arbolaux.getHijoDerecho()!=null)
@@ -76,7 +74,7 @@ namespace tpfinal
 				}
 			}
 			
-			return cola;
+			return  cola;
 		}
 	}
 }
