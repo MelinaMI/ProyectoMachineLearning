@@ -54,13 +54,10 @@ namespace tpfinal
 					todosLosCaminos+= "|" + j.getDatoRaiz().ToString() + "|" + "\n";
 				else
 					todosLosCaminos += "|" + j.getDatoRaiz().ToString();
-			}
-			
-			return todosLosCaminos;
-			
-		
-			
+			}			
+			return todosLosCaminos;	
 		}
+		
 		private List<ArbolBinario<DecisionData>> Caminos(ArbolBinario<DecisionData> arbol, ref List<ArbolBinario<DecisionData>> camino, ref List<ArbolBinario<DecisionData>> caminos,ref List<ArbolBinario<DecisionData>> copia)
 		{
 		
@@ -99,7 +96,7 @@ namespace tpfinal
 			ArbolBinario<DecisionData> arbolaux;
 			c.encolar(arbol);
 			c.encolar(null);
-			string cola = "";
+			string cola = "", colaAux= "";
 			while(!c.esVacia())
 			{
 				arbolaux=c.desencolar();
@@ -107,19 +104,18 @@ namespace tpfinal
 				{
 					if(!c.esVacia())
 						c.encolar(null);
-					
-					cola+="--> Nivel " + contadorNivel++ + "\n";
+					cola = cola + "Nivel "+ contadorNivel++ + ": " + colaAux + "\n";
+					colaAux="";
 				}
 				else
 				{
-					cola +=  arbolaux.getDatoRaiz().ToString() + " | ";
+					colaAux = colaAux + arbolaux.getDatoRaiz().ToString() + " | ";
 					if(arbolaux.getHijoIzquierdo()!=null)
 						c.encolar(arbolaux.getHijoIzquierdo());
 					if(arbolaux.getHijoDerecho()!=null)
 						c.encolar(arbolaux.getHijoDerecho());
 				}
 			}
-			
 			return  cola;
 		}
 	}

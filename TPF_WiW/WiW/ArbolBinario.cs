@@ -134,7 +134,6 @@ namespace tp2
 			return contenido;
 		}
 		
-		
 		public void recorridoPorNivelesConSeparacion()
 		{
 			int contadorNivel = 0;
