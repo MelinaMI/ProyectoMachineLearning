@@ -96,7 +96,7 @@ namespace tpfinal
 			ArbolBinario<DecisionData> arbolaux;
 			c.encolar(arbol);
 			c.encolar(null);
-			string cola = "", colaAux= "";
+			string info = "", infoAux= "";
 			while(!c.esVacia())
 			{
 				arbolaux=c.desencolar();
@@ -104,19 +104,19 @@ namespace tpfinal
 				{
 					if(!c.esVacia())
 						c.encolar(null);
-					cola = cola + "Nivel "+ contadorNivel++ + ": " + colaAux + "\n";
-					colaAux="";
+					info = info + "Nivel "+ contadorNivel++ + ": " + infoAux + "\n";
+					infoAux=""; //vuelvo a almacenar vacio
 				}
 				else
 				{
-					colaAux = colaAux + arbolaux.getDatoRaiz().ToString() + " | ";
+					infoAux = infoAux + arbolaux.getDatoRaiz().ToString() + " | ";
 					if(arbolaux.getHijoIzquierdo()!=null)
 						c.encolar(arbolaux.getHijoIzquierdo());
 					if(arbolaux.getHijoDerecho()!=null)
 						c.encolar(arbolaux.getHijoDerecho());
 				}
 			}
-			return  cola;
+			return  info;
 		}
 	}
 }
