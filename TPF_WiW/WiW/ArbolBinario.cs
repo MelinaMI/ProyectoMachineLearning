@@ -46,60 +46,7 @@ namespace tp2
 		public bool esHoja() {
 			return this.hijoIzquierdo==null && this.hijoDerecho==null;
 		}
-		
-		public void inorden()
-		{
-			//Se procesa el hijo izquierdo, luego la raíz y último el hijo derecho
-			if(hijoIzquierdo!=null)
-				hijoIzquierdo.inorden();
-			Console.Write(dato + " ");
-			if(hijoDerecho!=null)
-				hijoDerecho.inorden();
-		}
-		
-		public void postorden()
-		{
-			//Se procesan primero los hijos, izquierdo y derecho, y luego la raíz
-			if(hijoIzquierdo!=null)
-				hijoIzquierdo.postorden();
-			if(hijoDerecho!=null)
-				hijoDerecho.postorden();
-			Console.Write(dato + " ");
-		}
-		
-		public void recorridoPorNiveles()
-		{
-			//Se procesan los nodos teniendo en cuenta sus niveles, primero la raíz, luego los hijos, los hijos de éstos, etc.
-			
-			Cola<ArbolBinario<T>> c = new Cola<ArbolBinario<T>>();
-			ArbolBinario<T> arbolaux;
-			c.encolar(this);
-			while(!c.esVacia())
-			{
-				arbolaux=c.desencolar();
-				Console.Write(arbolaux.dato + " ");
-				
-				if(arbolaux.hijoIzquierdo !=null)
-					c.encolar(arbolaux.hijoIzquierdo);
-				if(arbolaux.hijoDerecho !=null)
-					c.encolar(arbolaux.hijoDerecho);
-			}
-		}
-		
-		public string Preorden()
-		{
-			//Se procesa primero la raíz y luego sus hijos, izquierdo y derecho.
-			string preOrden = "";
-			//Se procesa primero la raíz y luego sus hijos, izquierdo y derecho.
-			if(dato !=null)
-				preOrden = dato.ToString() + " ";
-			if(hijoIzquierdo!=null)
-				preOrden = preOrden + hijoIzquierdo.Preorden();
-			if(hijoDerecho!=null)
-				preOrden  = preOrden + hijoDerecho.Preorden();
-			return preOrden;
-		}
-		
+
 		public int contarHojas()
 		{
 			int contadorHojas=0;
@@ -134,35 +81,7 @@ namespace tp2
 			return contenido;
 		}
 		
-		public void recorridoPorNivelesConSeparacion()
-		{
-			int contadorNivel = 0;
-			Cola<ArbolBinario<T>> c = new Cola<ArbolBinario<T>>();
-			ArbolBinario<T> arbolaux;
-			c.encolar(this);
-			c.encolar(null);
-			
-			while(!c.esVacia())
-			{
-				arbolaux=c.desencolar();
-				
-				if(arbolaux == null)
-				{
-					if(!c.esVacia())
-						c.encolar(null);
-					contadorNivel = contadorNivel + 1;
-					Console.WriteLine("--> Nivel {0} ", contadorNivel);
-				}
-				else
-				{
-					
-					Console.Write(arbolaux.dato + " ");	
-					if(arbolaux.hijoIzquierdo!=null)
-						c.encolar(arbolaux.hijoIzquierdo);
-					if(arbolaux.hijoDerecho!=null)
-						c.encolar(arbolaux.hijoDerecho);
-				}
-			}
+		
 		}
 	}
 }

@@ -10,21 +10,14 @@ namespace tpfinal
 
 	class Estrategia
 	{
-		List<ArbolBinario<DecisionData>> camino = new List<ArbolBinario<DecisionData>>();
-		List<ArbolBinario<DecisionData>> caminos = new List<ArbolBinario<DecisionData>>();
-		List<ArbolBinario<DecisionData>> copia = new List<ArbolBinario<DecisionData>>();	
-		Cola<ArbolBinario<DecisionData>> c = new Cola<ArbolBinario<DecisionData>>();
-		
 		public ArbolBinario<DecisionData>CrearArbol(Clasificador clasificador)
 		{
-			DecisionData pregunta = new DecisionData(clasificador.obtenerPregunta()); 
-			ArbolBinario<DecisionData> arb = new ArbolBinario<DecisionData>(pregunta); 
+			DecisionData pregunta, nodohoja;
+			ArbolBinario<DecisionData> arb;
 			
-			DecisionData nodohoja;
-			
-			if(clasificador.crearHoja()==true) 
+			if(clasificador.crearHoja()==true)
 			{
-				nodohoja = new DecisionData(clasificador.obtenerDatoHoja()); 
+				nodohoja = new DecisionData(clasificador.obtenerDatoHoja());
 				arb = new ArbolBinario<DecisionData>(nodohoja);
 			}
 			else
@@ -46,52 +39,50 @@ namespace tpfinal
 
 		public String Consulta2(ArbolBinario<DecisionData> arbol)
 		{
+			List<ArbolBinario<DecisionData>> camino = new List<ArbolBinario<DecisionData>>();
+			List<ArbolBinario<DecisionData>> caminos = new List<ArbolBinario<DecisionData>>();
 			string todosLosCaminos= "";
-			Caminos(arbol,ref camino,ref caminos, ref copia);
+			Caminos(arbol, camino, caminos);
 			foreach(ArbolBinario<DecisionData> j in caminos)
 			{
 				if(j.esHoja())
 					todosLosCaminos+= "|" + j.getDatoRaiz().ToString() + "|" + "\n";
 				else
 					todosLosCaminos += "|" + j.getDatoRaiz().ToString();
-			}			
-			return todosLosCaminos;	
+			}
+			return todosLosCaminos;
 		}
 		
-		private List<ArbolBinario<DecisionData>> Caminos(ArbolBinario<DecisionData> arbol, ref List<ArbolBinario<DecisionData>> camino, ref List<ArbolBinario<DecisionData>> caminos,ref List<ArbolBinario<DecisionData>> copia)
+		private List<ArbolBinario<DecisionData>> Caminos(ArbolBinario<DecisionData> arbol,  List<ArbolBinario<DecisionData>> camino, List<ArbolBinario<DecisionData>> caminos)
 		{
-		
 			if(arbol.getDatoRaiz() !=null)
 			{
 				camino.Add(arbol);
 				if(arbol.esHoja())
 				{
-					//guarda camino en una lista de copia
-					copia.AddRange(camino);
-					//copia camino en caminos
 					foreach(ArbolBinario<DecisionData> i in camino)
 						caminos.Add(i);
-					 camino.RemoveAt(camino.Count - 1);
-					 return camino;
+					if(camino.Count>0)
+					{
+						camino.RemoveAt(camino.Count - 1);
+						return camino;
+					}
 				}
-			
+				
 				if(arbol.getHijoIzquierdo()!=null)
-				
-					Caminos(arbol.getHijoIzquierdo(),ref camino,ref caminos,ref copia);
-				
-				
+					Caminos(arbol.getHijoIzquierdo(), camino, caminos);
+					
 				if(arbol.getHijoDerecho()!=null)
-					Caminos(arbol.getHijoDerecho(),ref camino,ref caminos,ref copia);
-										
-				camino.RemoveAt(camino.Count - 1);
-				return camino;
+					Caminos(arbol.getHijoDerecho(), camino, caminos);
 			}
 			
+			camino.RemoveAt(camino.Count - 1);
 			return caminos;
 		}
 		
 		public String Consulta3(ArbolBinario<DecisionData> arbol)
 		{
+			Cola<ArbolBinario<DecisionData>> c = new Cola<ArbolBinario<DecisionData>>();
 			int contadorNivel = 0;
 			ArbolBinario<DecisionData> arbolaux;
 			c.encolar(arbol);
